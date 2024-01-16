@@ -45,13 +45,7 @@ public class Plateau {
         for (int i = maxY - 1; i >= 0; i--) {
             for (int j = 0; j < maxX; j++) {
                 char symbol = grid[i][j];
-                if (symbol == '\0') {
-                    // Display void for empty grid
-                    System.out.print(" . ");
-                } else {
-                    // Display rover symbol or direction
                     System.out.print(" " + symbol + " ");
-                }
             }
             System.out.println();
         }
