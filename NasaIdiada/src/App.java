@@ -21,7 +21,7 @@ public class App {
 
             while (setupAnotherRover) {
                 // Input for rover
-                System.out.print("Enter rover position (format: x y direction): ");
+                System.out.print("Enter rover position (format: x, y, direction (N,S,E,W)): ");
                 int x = readInt(scanner);
                 int y = readInt(scanner);
                 char direction = readDirection(scanner);
@@ -33,8 +33,8 @@ public class App {
                 plateau.displayPlateau();
 
                 // Input for instructions
-                System.out.print("Enter instructions for the rover: ");
-                String instructions = scanner.next();
+                System.out.print("Enter instructions for the rover (format: L, R, M): ");
+                String instructions = scanner.next().toUpperCase();
                 validateInstructions(instructions);
                 rover.executeInstructions(instructions);
 
@@ -42,6 +42,7 @@ public class App {
                 plateau.initializeGrid();
                 plateau.placeRover(rover);
                 plateau.displayPlateau();
+                System.out.println("The final rover position is: "+rover.getPosition());
 
                 // Ask if there is another rover to set up
                 System.out.print("Do you want to set up another rover? (yes/no): ");
