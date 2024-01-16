@@ -35,14 +35,13 @@ public class App {
                 // Input for instructions
                 System.out.print("Enter instructions for the rover (format: L, R, M): ");
                 String instructions = scanner.next().toUpperCase();
-                validateInstructions(instructions);
                 rover.executeInstructions(instructions);
 
                 // Display the plateau after the rover moves
                 plateau.initializeGrid();
                 plateau.placeRover(rover);
                 plateau.displayPlateau();
-                System.out.println("The final rover position is: "+rover.getPosition());
+                System.out.println("The final rover position is: " + rover.getPosition());
 
                 // Ask if there is another rover to set up
                 System.out.print("Do you want to set up another rover? (yes/no): ");
@@ -76,14 +75,6 @@ public class App {
                 return input.charAt(0);
             } else {
                 System.out.println("Invalid direction. Please enter N, S, W, or E.");
-            }
-        }
-    }
-
-    private static void validateInstructions(String instructions) throws RoverInstructionsFormatException {
-        for (char instruction : instructions.toCharArray()) {
-            if (instruction != 'L' && instruction != 'R' && instruction != 'M') {
-                throw new RoverInstructionsFormatException("Invalid instruction. Instructions must be 'L', 'R', or 'M'.");
             }
         }
     }

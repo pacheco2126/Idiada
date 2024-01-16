@@ -91,11 +91,15 @@ public class Rover {
         return x + " " + y + " " + direction;
     }
 
-    public void executeInstructions(String instructions) {
+    public void executeInstructions(String instructions) throws RoverInstructionsFormatException {
         for (char instruction : instructions.toCharArray()) {
+            if (instruction != 'L' && instruction != 'R' && instruction != 'M') {
+                throw new RoverInstructionsFormatException("Invalid instruction. Instructions must be 'L', 'R', or 'M'.");
+            }
             move(instruction);
         }
     }
+    
 
     public int getX() {
         return x;
