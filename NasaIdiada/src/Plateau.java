@@ -1,3 +1,4 @@
+
 public class Plateau {
     private int maxX;
     private int maxY;
@@ -19,12 +20,18 @@ public class Plateau {
     }
   
 
-    public void placeRover(Rover rover) {
+    public void placeRover(Rover rover) throws RoverOutOfPlateauException {
         int x = rover.getX();
         int y = rover.getY();
+
+        if (x < 0 || x >= maxX || y < 0 || y >= maxY) {
+            throw new RoverOutOfPlateauException("Rover fell out of the plateau.");
+        }
+
         char roverSymbol = getDirectionSymbol(rover.getDirection());
         grid[y][x] = roverSymbol;
     }
+    
 
     private char getDirectionSymbol(char direction) {
         switch (direction) {

@@ -26,7 +26,7 @@ public class App {
                 int y = readInt(scanner);
                 char direction = readDirection(scanner);
 
-                Rover rover = new Rover(x, y, direction);
+                Rover rover = new Rover(x, y, direction, plateau);
                 plateau.placeRover(rover);
 
                 // Display the plateau with the rover

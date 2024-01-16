@@ -3,23 +3,18 @@ public class Rover {
     private int x;
     private int y;
     private char direction;
+    private Plateau plateau;
 
     //constructor 
-    public Rover(int x, int y, char direction) throws RoverPositionFormatException {
-        validatePositionFormat(x, y, direction);
+    public Rover(int x, int y, char direction, Plateau plateau) throws RoverPositionFormatException {
         this.x = x;
         this.y = y;
         this.direction = direction;
-    }
-    private void validatePositionFormat(int x, int y, char direction) throws RoverPositionFormatException {
-        if (!(direction == 'N' || direction == 'S' || direction == 'W' || direction == 'E')) {
-            throw new RoverPositionFormatException("Invalid direction. Direction must be N, S, W, or E.");
-        }
-        // You can add additional validation logic as needed
+        this.plateau = plateau;
     }
 
     //routine to make the rover moves within the grid
-    public void move(char instruction) {
+    public void move(char instruction) throws RoverOutOfPlateauException {
         switch (Character.toUpperCase(instruction)) {
             case 'L':
                 turnLeft();
@@ -28,7 +23,7 @@ public class Rover {
                 turnRight();
                 break;
             case 'M':
-                moveForward();
+                moveForward(plateau);
                 break;
             default:
                 // Ignore invalid instructions
@@ -70,19 +65,35 @@ public class Rover {
         }
     }
 
-    private void moveForward() {
+    private void moveForward(Plateau plateau) throws RoverOutOfPlateauException {
         switch (direction) {
             case 'N':
-                y++;
+                if (y + 1 <= plateau.getMaxY()) {
+                    y++;
+                } else {
+                    throw new RoverOutOfPlateauException("Rover fell out of the plateau.");
+                }
                 break;
             case 'E':
-                x++;
+                if (x + 1 <= plateau.getMaxX()) {
+                    x++;
+                } else {
+                    throw new RoverOutOfPlateauException("Rover fell out of the plateau.");
+                }
                 break;
             case 'S':
-                y--;
+                if (y - 1 >= 0) {
+                    y--;
+                } else {
+                    throw new RoverOutOfPlateauException("Rover fell out of the plateau.");
+                }
                 break;
             case 'W':
-                x--;
+                if (x - 1 >= 0) {
+                    x--;
+                } else {
+                    throw new RoverOutOfPlateauException("Rover fell out of the plateau.");
+                }
                 break;
         }
     }
@@ -91,7 +102,7 @@ public class Rover {
         return x + " " + y + " " + direction;
     }
 
-    public void executeInstructions(String instructions) throws RoverInstructionsFormatException {
+    public void executeInstructions(String instructions) throws RoverInstructionsFormatException, RoverOutOfPlateauException {
         for (char instruction : instructions.toCharArray()) {
             if (instruction != 'L' && instruction != 'R' && instruction != 'M') {
                 throw new RoverInstructionsFormatException("Invalid instruction. Instructions must be 'L', 'R', or 'M'.");
@@ -99,7 +110,6 @@ public class Rover {
             move(instruction);
         }
     }
-    
 
     public int getX() {
         return x;
@@ -112,5 +122,4 @@ public class Rover {
     public char getDirection() {
         return direction;
     }
-
 }
