@@ -1,3 +1,5 @@
+package app;
+import app.exceptions.RoverOutOfPlateauException;
 
 public class Plateau {
     private int maxX;

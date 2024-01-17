@@ -1,3 +1,10 @@
+package app;
+
+import app.exceptions.RoverInstructionsFormatException;
+import app.exceptions.RoverOutOfPlateauException;
+import app.exceptions.RoverPositionFormatException;
+
+
 public class Rover {
     // properties
     private int x;
@@ -7,6 +14,7 @@ public class Rover {
 
     //constructor 
     public Rover(int x, int y, char direction, Plateau plateau) throws RoverPositionFormatException {
+        validateDirection(direction);
         this.x = x;
         this.y = y;
         this.direction = direction;
@@ -108,6 +116,12 @@ public class Rover {
                 throw new RoverInstructionsFormatException("Invalid instruction. Instructions must be 'L', 'R', or 'M'.");
             }
             move(instruction);
+        }
+    }
+
+    private void validateDirection(char direction) throws RoverPositionFormatException {
+        if (!(direction == 'N' || direction == 'S' || direction == 'W' || direction == 'E')) {
+            throw new RoverPositionFormatException("Invalid direction. Direction must be N, S, W, or E.");
         }
     }
 
