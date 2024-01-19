@@ -6,7 +6,7 @@ Welcome to my Technical test for Idiada.
 
 - Download the Zip
 - Open your terminal and go to the program folder cd NasaIdiada/src
-- Execute `javac App.java Rover.java Plateau.java` to compile the program
+- Execute `javac App.java Rover.java Plateau.java` etc. to compile the program
 - Once compiled, execute `java App` to run the program and follow the instructions
 
 ## What the program does
